@@ -1,2 +1,2 @@
 # nlog
-Note를 Blog로 만들어 공부한 것을 기록하고 공유할 수 있는 블로그 플랫폼
+Nblog FE MonoRepo
