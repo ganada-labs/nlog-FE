@@ -1,0 +1,7 @@
+@layer reset, base, tokens, recipes, utilities;
+
+/* custom reset */
+
+button {
+  cursor: pointer;
+}
