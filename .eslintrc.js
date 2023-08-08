@@ -4,7 +4,6 @@ const { defineConfig } = require("eslint-define-config");
 
 module.exports = defineConfig({
   root: true,
-  files: ["**/*.ts", "**/*.tsx"],
   env: {
     browser: true,
     es2021: true,
