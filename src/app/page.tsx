@@ -1,3 +1,5 @@
+import { Header } from "src/components/Header";
+
 import { css } from "styled-system/css";
 
 import dynamic from "next/dynamic";
@@ -19,6 +21,7 @@ const pandaStyle = css({
 export default function HomePage() {
   return (
     <>
+      <Header />
       <div className={pandaStyle}>PANDA CSS WORKING AS SERVER COMPONENT</div>
       <BlockNote />
     </>
