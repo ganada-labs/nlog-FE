@@ -1,8 +1,7 @@
-import { Header } from "src/components/Header";
-
 import { css } from "styled-system/css";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const BlockNote = dynamic(
   async () => {
@@ -21,7 +20,7 @@ const pandaStyle = css({
 export default function HomePage() {
   return (
     <>
-      <Header />
+      <Link href='/login'>go to login</Link>
       <div className={pandaStyle}>PANDA CSS WORKING AS SERVER COMPONENT</div>
       <BlockNote />
     </>
