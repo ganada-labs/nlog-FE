@@ -2,7 +2,7 @@
 
 export default function Login() {
   const handleClick = () => {
-    fetch("/api/auth?provider=google");
+    window.location.assign("https://api.new-blog.store/auth/google");
   };
 
   return (
