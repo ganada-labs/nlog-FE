@@ -1,3 +1,5 @@
+import { TestButton } from "src/components/TestButton";
+
 import { css } from "styled-system/css";
 
 import dynamic from "next/dynamic";
@@ -23,6 +25,7 @@ export default function HomePage() {
       <Link href='/login'>go to login</Link>
       <div className={pandaStyle}>PANDA CSS WORKING AS SERVER COMPONENT</div>
       <BlockNote />
+      <TestButton />
     </>
   );
 }
