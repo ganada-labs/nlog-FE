@@ -32,7 +32,8 @@ nlogAPI.interceptors.response.use(
     if (status === HttpStatusCode.Unauthorized) {
       const { data:newToken } = await axios.get("/api/refresh");
       console.log('newToken:',newToken)
-      accessToken = newToken
+      accessToken = newToken;
+      config.headers.Authorization = `Bearer ${accessToken}`;
       return axios.request(config);
     }
     if (status === HttpStatusCode.Forbidden) {
