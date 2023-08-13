@@ -8,7 +8,6 @@ export const nlogAPI = axios.create({
 
 nlogAPI.interceptors.request.use(
   (config) => {
-    console.log("token:",accessToken)
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -31,7 +30,6 @@ nlogAPI.interceptors.response.use(
     } = error;
     if (status === HttpStatusCode.Unauthorized) {
       const { data:newToken } = await axios.get("/api/refresh");
-      console.log('newToken:',newToken)
       accessToken = newToken;
       config.headers.Authorization = `Bearer ${accessToken}`;
       return axios.request(config);
