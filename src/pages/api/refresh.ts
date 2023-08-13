@@ -8,10 +8,16 @@ export default async function refresh(req: NextApiRequest, res: NextApiResponse)
   /**
    * api에 refresh 요청
    */
-  const { data: newToken } = await nlogAPI.get("/auth/refresh", {
+  const { data: newTokens } = await nlogAPI.get("/auth/refresh", {
     headers: {
       Authorization: `Bearer ${refreshToken}`,
     },
   });
-  res.status(200).json(newToken);
+
+  const { accessToken: newAccessToken, refreshToken: newRefreshToken } = newTokens;
+  res.setHeader(
+    "Set-Cookie",
+    `refreshToken=${newRefreshToken}; Domain=.api.new-blog.store; HttpOnly`,
+  );
+  res.status(200).json(newAccessToken);
 }

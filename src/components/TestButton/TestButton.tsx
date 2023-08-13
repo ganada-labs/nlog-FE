@@ -4,7 +4,7 @@ import { nlogAPI } from "src/utils/nlog-api";
 
 const handleClick = async () => {
   const res = await nlogAPI.get("/user");
-  alert(res.data);
+  alert(JSON.stringify(res.data));
 };
 
 export function TestButton() {
