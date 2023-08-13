@@ -19,6 +19,7 @@
     "@blocknote/react": "^0.8.5",
     "@tiptap/core": "^2.0.4",
     "@tiptap/pm": "^2.0.4",
+    "axios": "^1.4.0",
     "next": "13.4.9",
     "prosemirror-model": "^1.19.3",
     "prosemirror-state": "^1.4.3",

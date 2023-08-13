@@ -18,6 +18,5 @@ export default async function refresh(req: NextApiRequest, res: NextApiResponse)
   res.setHeader("Set-Cookie", [
     `refresh_token=${newRefreshToken}; Domain=.new-blog.store; HttpOnly; Path=/;`,
   ]);
-
   res.status(200).json(newAccessToken);
 }
