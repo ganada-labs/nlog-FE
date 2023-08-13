@@ -15,9 +15,9 @@ export default async function refresh(req: NextApiRequest, res: NextApiResponse)
   });
 
   const { accessToken: newAccessToken, refreshToken: newRefreshToken } = newTokens;
-  res.setHeader(
-    "Set-Cookie",
-    `refreshToken=${newRefreshToken}; Domain=.api.new-blog.store; HttpOnly`,
-  );
+  res.setHeader("Set-Cookie", [
+    `refresh_token=${newRefreshToken}; Domain=.new-blog.store; HttpOnly`,
+    "test=abc;",
+  ]);
   res.status(200).json(newAccessToken);
 }
