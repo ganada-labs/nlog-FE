@@ -3,6 +3,7 @@ import axios, { HttpStatusCode } from "axios";
 let accessToken = ''
 
 export const nlogAPI = axios.create({
+  withCredentials:true,
   baseURL: "https://api.new-blog.store",
 });
 
