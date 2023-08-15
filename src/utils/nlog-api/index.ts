@@ -29,8 +29,9 @@ nlogAPI.interceptors.response.use(
       response: { status },
     } = error;
     if (status === HttpStatusCode.Unauthorized) {
-      const { data:newToken } = await axios.get("/api/refresh");
-      accessToken = newToken;
+      const { data } = await nlogAPI.get('/auth/refresh')
+
+      accessToken = data.accessToken;
       config.headers.Authorization = `Bearer ${accessToken}`;
       return axios.request(config);
     }
