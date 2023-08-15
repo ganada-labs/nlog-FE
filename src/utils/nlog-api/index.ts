@@ -3,7 +3,6 @@ import axios, { HttpStatusCode } from "axios";
 let accessToken = ''
 
 export const nlogAPI = axios.create({
-  withCredentials:true,
   baseURL: "https://api.new-blog.store",
 });
 
@@ -30,7 +29,7 @@ nlogAPI.interceptors.response.use(
       response: { status },
     } = error;
     if (status === HttpStatusCode.Unauthorized) {
-      const { data } = await nlogAPI.get('/auth/refresh')
+      const { data } = await nlogAPI.get('/auth/refresh', { withCredentials: true})
 
       accessToken = data.accessToken;
       config.headers.Authorization = `Bearer ${accessToken}`;
