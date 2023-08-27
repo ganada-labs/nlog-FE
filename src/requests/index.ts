@@ -10,3 +10,7 @@ type Post = {
 export async function createPost(post: Post) {
   return await nlogAPI.post("/post", post);
 }
+
+export async function fetchPost(id: string) {
+  return await nlogAPI.get(`/post/${id}`);
+}
