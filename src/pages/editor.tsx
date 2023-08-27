@@ -35,7 +35,7 @@ export default function Editor() {
       title,
     });
 
-    router.push(`/${data.id}`);
+    router.push(`/post/${data.id}`);
   };
 
   return (
