@@ -29,12 +29,12 @@ export default function Editor() {
   };
 
   const handlePublish: MouseEventHandler<HTMLButtonElement> = async () => {
-    await createPost({
+    const { data } = await createPost({
       contents,
       title,
     });
 
-    redirect("/some-where");
+    redirect(`/${data.id}`);
   };
 
   return (
