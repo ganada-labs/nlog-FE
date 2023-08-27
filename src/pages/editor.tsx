@@ -16,8 +16,8 @@ export default function Editor() {
   const [title, setTitle] = useState("");
 
   const handleTitle: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const value = e.currentTarget.value;
-    setTitle(value);
+    const newTitle = e.currentTarget.value;
+    setTitle(newTitle);
   };
 
   return (
