@@ -20,6 +20,7 @@ export default function Post(props: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
+  console.log(id);
   const { data } = await fetchPost(id as string);
 
   console.log(id, data);
