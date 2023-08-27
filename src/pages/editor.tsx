@@ -15,7 +15,7 @@ const BlockNote = dynamic(
 export default function Editor() {
   const [title, setTitle] = useState("");
 
-  const handleChangeTitle: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleTitle: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = e.currentTarget.value;
     setTitle(value);
   };
@@ -28,7 +28,7 @@ export default function Editor() {
       </div>
       <label>
         <span>Title: </span>
-        <input value={title} onChange={handleChangeTitle}></input>
+        <input value={title} onChange={handleTitle}></input>
       </label>
       <BlockNote />
     </>
