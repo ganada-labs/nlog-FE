@@ -22,7 +22,7 @@ const pandaStyle = css({
 export default function HomePage() {
   return (
     <>
-      <Link href='/login'>go to login</Link>
+      <Link href='/login'>go to login</Link> | <Link href='/editor'>go to editor page</Link>
       <div className={pandaStyle}>PANDA CSS WORKING AS SERVER COMPONENT</div>
       <BlockNote />
       <TestButton />
