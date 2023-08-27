@@ -5,7 +5,7 @@ import { createPost } from "src/requests";
 import { Block } from "@blocknote/core";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 import { type ChangeEventHandler, type MouseEventHandler, useState } from "react";
 
 const BlockNote = dynamic(
@@ -17,6 +17,7 @@ const BlockNote = dynamic(
 );
 
 export default function Editor() {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState<Block[]>([]);
   const handleTitle: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -34,7 +35,7 @@ export default function Editor() {
       title,
     });
 
-    redirect(`/${data.id}`);
+    router.push(`/${data.id}`);
   };
 
   return (
