@@ -1,29 +1,34 @@
 import { fetchPost } from "src/requests";
 
+import { Block } from "@blocknote/core";
 import { type GetServerSideProps } from "next";
 import { HTMLAttributes } from "react";
 
+type meta = {
+  author: string;
+};
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  post: object;
+  post: {
+    title: string;
+    meta: meta;
+    contents: Block[];
+  };
 }
 export default function Post(props: Props) {
   const { post } = props;
 
-  console.log(post);
-
   return (
-    <div>
-      <h1>Title</h1>
-    </div>
+    <>
+      <h1>{post.title}</h1>
+      <span>author: {post.meta.author}</span>
+    </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
-  console.log(id);
   const { data } = await fetchPost(id as string);
 
-  console.log(id, data);
   return {
     props: {
       post: data,
