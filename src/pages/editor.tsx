@@ -1,8 +1,11 @@
 "use client";
 
+import { createPost } from "src/requests";
+
 import { Block } from "@blocknote/core";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { type ChangeEventHandler, type MouseEventHandler, useState } from "react";
 
 const BlockNote = dynamic(
@@ -25,8 +28,13 @@ export default function Editor() {
     setContents(blocks);
   };
 
-  const handlePublish: MouseEventHandler<HTMLButtonElement> = () => {
-    console.log(title, contents);
+  const handlePublish: MouseEventHandler<HTMLButtonElement> = async () => {
+    await createPost({
+      contents,
+      title,
+    });
+
+    redirect("/some-where");
   };
 
   return (
