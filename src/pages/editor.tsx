@@ -1,8 +1,9 @@
 "use client";
 
+import { Block } from "@blocknote/core";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ChangeEventHandler, useState } from "react";
+import { type ChangeEventHandler, type MouseEventHandler, useState } from "react";
 
 const BlockNote = dynamic(
   async () => {
@@ -14,10 +15,18 @@ const BlockNote = dynamic(
 
 export default function Editor() {
   const [title, setTitle] = useState("");
-
+  const [contents, setContents] = useState<Block[]>([]);
   const handleTitle: ChangeEventHandler<HTMLInputElement> = (e) => {
     const newTitle = e.currentTarget.value;
     setTitle(newTitle);
+  };
+
+  const handleBlockNote = (blocks: Block[]) => {
+    setContents(blocks);
+  };
+
+  const handlePublish: MouseEventHandler<HTMLButtonElement> = () => {
+    console.log(title, contents);
   };
 
   return (
@@ -30,7 +39,12 @@ export default function Editor() {
         <span>Title: </span>
         <input value={title} onChange={handleTitle}></input>
       </label>
-      <BlockNote />
+      <BlockNote onEdit={handleBlockNote} />
+      <div>
+        <button type='button' onClick={handlePublish}>
+          publish
+        </button>
+      </div>
     </>
   );
 }
