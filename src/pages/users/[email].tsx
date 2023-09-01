@@ -29,8 +29,8 @@ export default function Post(props: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query;
-  const { data: user } = await fetchUserById(id as string);
+  const { email } = context.query;
+  const { data: user } = await fetchUserById(email as string);
   const { data: posts } = await fetchPostList(user.email);
   return {
     props: {
