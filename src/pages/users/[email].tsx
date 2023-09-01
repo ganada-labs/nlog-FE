@@ -19,7 +19,7 @@ export default function Post(props: Props) {
         {posts.map((post, index) => (
           <li key={index}>
             <h3>
-              <Link href={`/post/${post.id}`}>{post.title}</Link>
+              <Link href={`/posts/${post.id}`}>{post.title}</Link>
             </h3>
           </li>
         ))}
