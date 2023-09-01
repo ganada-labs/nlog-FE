@@ -1,10 +1,4 @@
-import {
-  fetchPostList,
-  fetchUser,
-  fetchUserById,
-  type PostResponse,
-  type User,
-} from "src/requests";
+import { fetchPostList, fetchUserById, type PostResponse, type User } from "src/requests";
 
 import { type GetServerSideProps } from "next";
 import Link from "next/link";
@@ -36,7 +30,6 @@ export default function Post(props: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { email } = context.query;
-  await fetchUser(); // access token 갱신용
   const { data: user } = await fetchUserById(email as string);
   const { data: posts } = await fetchPostList(user.email);
   return {

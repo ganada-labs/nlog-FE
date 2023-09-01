@@ -1,4 +1,4 @@
-import { deletePost, fetchPost } from "src/requests";
+import { deletePost, fetchPost, fetchUser } from "src/requests";
 
 import { type Block, InlineContent } from "@blocknote/core";
 import { type GetServerSideProps } from "next";
@@ -88,9 +88,10 @@ export default function Post(props: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
+  await fetchUser(); // access token 갱신용
   const { data } = await fetchPost(id as string);
   const { isAuthor, post } = data;
-  console.log(isAuthor);
+
   return {
     props: {
       isAuthor,
