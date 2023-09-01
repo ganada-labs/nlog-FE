@@ -90,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
   const { data } = await fetchPost(id as string);
   const { isAuthor, post } = data;
-
+  console.log(isAuthor);
   return {
     props: {
       isAuthor,
