@@ -1,4 +1,4 @@
-import { deletePost, fetchIsAuthor, fetchPost } from "src/requests";
+import { deletePost, fetchIsAuthor, fetchPost, fetchUser } from "src/requests";
 
 import { type Block, InlineContent } from "@blocknote/core";
 import { type GetServerSideProps } from "next";
@@ -25,6 +25,7 @@ export default function Post(props: Props) {
   const router = useRouter();
 
   const checkIsAuthor = async () => {
+    await fetchUser(); // access token 발급용
     const { data } = await fetchIsAuthor(post.id);
     const { isAuthor } = data;
 
