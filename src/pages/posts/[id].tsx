@@ -54,7 +54,6 @@ export default function Post(props: Props) {
 
     return [...acc, content];
   }, []);
-  console.log(groupedContents);
 
   return (
     <>
