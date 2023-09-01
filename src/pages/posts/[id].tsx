@@ -1,9 +1,9 @@
-import { deletePost, fetchPost, fetchUser } from "src/requests";
+import { deletePost, fetchIsAuthor, fetchPost } from "src/requests";
 
 import { type Block, InlineContent } from "@blocknote/core";
 import { type GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useEffect, useState } from "react";
 
 type meta = {
   author: string;
@@ -20,8 +20,20 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Post(props: Props) {
-  const { post, isAuthor } = props;
+  const { post } = props;
+  const [isAuthor, setIsAuthor] = useState<boolean>(false);
   const router = useRouter();
+
+  const checkIsAuthor = async () => {
+    const { data } = await fetchIsAuthor(post.id);
+    const { isAuthor } = data;
+
+    setIsAuthor(isAuthor);
+  };
+
+  useEffect(() => {
+    checkIsAuthor();
+  }, []);
 
   const groupedContents = post.contents.reduce((acc: (Block | Block[])[], content: Block) => {
     if (content.type === "numberedListItem") {
@@ -88,13 +100,11 @@ export default function Post(props: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
-  await fetchUser(); // access token 갱신용
   const { data } = await fetchPost(id as string);
-  const { isAuthor, post } = data;
+  const { post } = data;
 
   return {
     props: {
-      isAuthor,
       post,
     },
   };
