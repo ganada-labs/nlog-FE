@@ -22,6 +22,10 @@ export async function createPost(post: Post) {
   return await nlogAPI.post("/post", post);
 }
 
+export async function fetchIsAuthor(id: string) {
+  return await nlogAPI.get(`/post/${id}?isAuthor=true`);
+}
+
 export async function fetchPost(id: string) {
   return await nlogAPI.get(`/post/${id}`);
 }
