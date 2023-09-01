@@ -1,7 +1,8 @@
-import { fetchPost } from "src/requests";
+import { deletePost, fetchPost } from "src/requests";
 
 import { type Block, InlineContent } from "@blocknote/core";
 import { type GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 import { HTMLAttributes } from "react";
 
 type meta = {
@@ -9,7 +10,9 @@ type meta = {
 };
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
+  isAuthor: boolean;
   post: {
+    id: string;
     title: string;
     meta: meta;
     contents: Block[];
@@ -17,7 +20,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Post(props: Props) {
-  const { post } = props;
+  const { post, isAuthor } = props;
+  const router = useRouter();
 
   const groupedContents = post.contents.reduce((acc: (Block | Block[])[], content: Block) => {
     if (content.type === "numberedListItem") {
@@ -55,10 +59,28 @@ export default function Post(props: Props) {
     return [...acc, content];
   }, []);
 
+  const handleDelete = async () => {
+    await deletePost(post.id);
+
+    router.push(`/users/${post.meta.author}`);
+  };
+
   return (
     <>
       <h1>{post.title}</h1>
       <span>author: {post.meta.author}</span>
+      <ul>
+        {isAuthor ? (
+          <li>
+            <button type='button' onClick={handleDelete}>
+              삭제
+            </button>
+          </li>
+        ) : (
+          ""
+        )}
+      </ul>
+
       {groupedContents.map((content) => contentOrContentListToElement(content))}
     </>
   );
@@ -67,10 +89,12 @@ export default function Post(props: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
   const { data } = await fetchPost(id as string);
+  const { isAuthor, post } = data;
 
   return {
     props: {
-      post: data,
+      isAuthor,
+      post,
     },
   };
 };

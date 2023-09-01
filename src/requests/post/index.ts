@@ -29,3 +29,7 @@ export async function fetchPost(id: string) {
 export async function fetchPostList(author: string) {
   return await nlogAPI.get(`/post?author=${author}`);
 }
+
+export async function deletePost(id: string) {
+  return await nlogAPI.delete(`/post/${id}`);
+}
