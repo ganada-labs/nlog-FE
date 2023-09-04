@@ -34,6 +34,10 @@ export async function fetchPostList(author: string) {
   return await nlogAPI.get(`/post?author=${author}`);
 }
 
+export async function updatePost(id: string, newPost: Post) {
+  return await nlogAPI.patch(`/post/${id}`, newPost);
+}
+
 export async function deletePost(id: string) {
   return await nlogAPI.delete(`/post/${id}`);
 }
