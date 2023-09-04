@@ -5,16 +5,15 @@ import { type GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { HTMLAttributes, useEffect, useState } from "react";
 
-type meta = {
+type Meta = {
   author: string;
 };
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  isAuthor: boolean;
   post: {
     id: string;
     title: string;
-    meta: meta;
+    meta: Meta;
     contents: Block[];
   };
 }
@@ -78,17 +77,28 @@ export default function Post(props: Props) {
     router.push(`/users/${post.meta.author}`);
   };
 
+  const handleModify = () => {
+    router.push(`/editor/${post.id}`);
+  };
+
   return (
     <>
       <h1>{post.title}</h1>
       <span>author: {post.meta.author}</span>
       <ul>
         {isAuthor ? (
-          <li>
-            <button type='button' onClick={handleDelete}>
-              삭제
-            </button>
-          </li>
+          <>
+            <li>
+              <button type='button' onClick={handleModify}>
+                수정
+              </button>
+            </li>
+            <li>
+              <button type='button' onClick={handleDelete}>
+                삭제
+              </button>
+            </li>
+          </>
         ) : (
           ""
         )}

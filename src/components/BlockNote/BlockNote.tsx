@@ -8,10 +8,11 @@ import { HTMLAttributes } from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   onEdit?: (blocks: Block[]) => void;
+  init?: Block[];
 }
 
 export function BlockNote(props: Props) {
-  const { onEdit } = props;
+  const { onEdit, init } = props;
 
   const onEditorContentChange = (editor: BlockNoteEditor) => {
     if (!onEdit) return;
@@ -19,6 +20,7 @@ export function BlockNote(props: Props) {
   };
 
   const editor: BlockNoteEditor | null = useBlockNote({
+    initialContent: init,
     onEditorContentChange,
   });
 
