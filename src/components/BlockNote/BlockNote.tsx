@@ -22,17 +22,5 @@ export function BlockNote(props: Props) {
     onEditorContentChange,
   });
 
-  const handleCick = () => {
-    console.log(editor?.blockCache);
-    alert("blocknote cache printed in console");
-  };
-
-  return (
-    <>
-      <button onClick={handleCick} type='button'>
-        click
-      </button>
-      <BlockNoteView editor={editor} />
-    </>
-  );
+  return <BlockNoteView editor={editor} />;
 }
