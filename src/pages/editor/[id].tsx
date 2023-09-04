@@ -46,12 +46,12 @@ export default function Editor(props: Props) {
   };
 
   const handleUpdate: MouseEventHandler<HTMLButtonElement> = async () => {
-    const { data } = await updatePost(post.id, {
+    await updatePost(post.id, {
       contents,
       title,
     });
 
-    router.push(`/posts/${data.id}`);
+    router.push(`/posts/${post.id}`);
   };
 
   return (
