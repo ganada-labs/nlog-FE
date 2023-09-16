@@ -1,8 +1,10 @@
 "use client";
 
+import { ENV } from "src/constants";
+
 export default function Login() {
   const handleClick = () => {
-    window.location.assign("https://api.new-blog.store/auth/google");
+    window.location.assign(`${ENV.NLOG_API}/auth/google`);
   };
 
   return (
