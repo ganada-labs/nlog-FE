@@ -1,9 +1,11 @@
 import axios, { HttpStatusCode } from "axios";
 
+import { ENV } from "src/constants";
+
 let accessToken = ''
 
 export const nlogAPI = axios.create({
-  baseURL: "https://api.new-blog.store",
+  baseURL: ENV.NLOG_API,
 });
 
 nlogAPI.interceptors.request.use(
